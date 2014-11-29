@@ -2068,7 +2068,7 @@
     invoke-static {v0, v5, v1, v8, v12}, Landroid/os/BatteryStats;->dumpLine(Ljava/io/PrintWriter;ILjava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
 
     .line 1267
-    const/4 v5, 0x5
+    const/4 v5, 0x7
 
     new-array v12, v5, [Ljava/lang/Object;
 
@@ -2076,7 +2076,7 @@
     const/16 v30, 0x0
 
     :goto_4
-    const/4 v5, 0x5
+    const/4 v5, 0x7
 
     move/from16 v0, v30
 
@@ -2159,7 +2159,7 @@
     const/16 v30, 0x0
 
     :goto_5
-    const/4 v5, 0x5
+    const/4 v5, 0x7
 
     move/from16 v0, v30
 
@@ -5242,7 +5242,7 @@
     const/16 v34, 0x0
 
     :goto_5
-    const/4 v6, 0x5
+    const/4 v6, 0x7
 
     move/from16 v0, v34
 

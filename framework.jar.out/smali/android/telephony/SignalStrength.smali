@@ -24,15 +24,15 @@
 
 .field private static final LOG_TAG:Ljava/lang/String; = "SignalStrength"
 
-.field public static final NUM_SIGNAL_STRENGTH_BINS:I = 0x5
+.field public static final NUM_SIGNAL_STRENGTH_BINS:I = 0x7
 
 .field public static final SIGNAL_STRENGTH_GOOD:I = 0x3
 
 .field public static final SIGNAL_STRENGTH_GREAT:I = 0x4
 
-.field public static final SIGNAL_STRENGTH_GREATER:I = 0x3
+.field public static final SIGNAL_STRENGTH_GREATER:I = 0x5
 
-.field public static final SIGNAL_STRENGTH_GREATEST:I = 0x4
+.field public static final SIGNAL_STRENGTH_GREATEST:I = 0x6
 
 .field public static final SIGNAL_STRENGTH_MODERATE:I = 0x2
 
@@ -117,7 +117,7 @@
 
     .prologue
     .line 57
-    const/4 v0, 0x5
+    const/4 v0, 0x7
 
     new-array v0, v0, [Ljava/lang/String;
 
@@ -151,13 +151,13 @@
 
     aput-object v2, v0, v1
 
-    const/4 v1, 0x3
+    const/4 v1, 0x5
 
     const-string v2, "greater"
 
     aput-object v2, v0, v1
 
-    const/4 v1, 0x4
+    const/4 v1, 0x6
 
     const-string v2, "greatest"
 
