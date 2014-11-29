@@ -1,0 +1,67 @@
+#!/system/bin/sh
+
+doLog(){
+    log -p $1 -t bug2go-bugreport-oem $2
+}
+
+collectAplogd(){
+    # Grab the last 3 sets if aplogd is active.
+    case $(getprop persist.log.aplogd.enable) in
+    1)
+        doLog d "Collecting aplogd logs"
+        for loc in /data/logger /storage/sdcard0/logger /storage/sdcard1/logger; do
+            for set in log backup.0.log backup.1.log; do
+                for buffer in main system radio events kernel; do
+                    for file in $(ls ${loc}/${set}.${buffer}* 2>/dev/null); do
+                        # strip "/" to "_" for a unique path
+                        outFile=${file:1}
+                        outFile=${outFile//\//_}
+                        logwrapper cp $file ${outputPath}/${outFile}
+                    done
+                done
+            done
+        done
+    ;;
+    esac
+}
+
+collectBatteryTracer(){
+    doLog d "Collecting Battery Tracer logs"
+    local battTracerLocs="\
+        /storage/sdcard0/batterytracer/databases/current\
+        /storage/sdcard0/batterytracer/databases/backup0"
+    for loc in $battTracerLocs; do
+        for file in $(ls $loc/*.btd); do
+            logwrapper cp $file $outputPath
+        done
+    done
+}
+
+collectDontpanic(){
+    doLog d "Collecting dontpanic logs"
+    for file in $(ls /data/dontpanic/)
+    do
+        logwrapper cp /data/dontpanic/$file $outputPath
+    done
+}
+
+collectSbcm(){
+    doLog d "Collecting SBCM logs"
+    logwrapper cp /data/battd/SBCM_logfile.bin $outputPath
+    logwrapper cp /data/battd/SBCM_logfile_old.bin $outputPath
+}
+
+collectPowerSupplyLogger(){
+    doLog d "Collecting Power Supply Logger logs"
+    logwrapper cp /data/power_supply_logger/power_supply_info.bin $outputPath
+}
+
+reportId=$1
+outputPath=$2
+
+collectAplogd
+collectBatteryTracer
+collectDontpanic
+collectSbcm
+collectPowerSupplyLogger
+

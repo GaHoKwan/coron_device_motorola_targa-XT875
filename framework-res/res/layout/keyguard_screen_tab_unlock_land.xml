@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:orientation="vertical" android:id="@id/topHeader" android:layout_width="320.0dip" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/secured_lockscreen_status_side_margin" android:layout_marginTop="@dimen/secured_lockscreen_status_side_margin" android:layout_marginRight="@dimen/secured_lockscreen_status_side_margin" layout="@layout/zz_moto_left_side_status_top" />
+    <include android:id="@id/transport" android:layout_width="320.0dip" android:layout_height="108.0dip" android:layout_marginLeft="@dimen/secured_lockscreen_status_side_margin" android:layout_marginTop="6.0dip" android:layout_marginRight="@dimen/secured_lockscreen_status_side_margin" android:layout_below="@id/topHeader" layout="@layout/keyguard_transport_control" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <TextView android:textAppearance="?textAppearanceMedium" android:textSize="@dimen/moto_keyguard_lockscreen_statusview_textsize" android:textStyle="bold" android:textColor="?textColorSecondary" android:ellipsize="marquee" android:gravity="center" android:layout_gravity="left" android:id="@id/carrier" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/secured_lockscreen_status_side_margin" android:layout_marginBottom="6.0dip" android:singleLine="true" />
+        <include layout="@layout/zz_moto_keyguard_screen_tab_unlock_bottom_land" />
+    </LinearLayout>
+    <include android:layout_width="320.0dip" android:layout_height="fill_parent" android:layout_alignParentRight="true" layout="@layout/zz_moto_keyguard_unlock_widget" />
+</RelativeLayout>

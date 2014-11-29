@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?textAppearanceMedium" android:textSize="@dimen/moto_keyguard_lockscreen_statusview_textsize" android:textStyle="bold" android:textColor="?textColorSecondary" android:ellipsize="marquee" android:layout_gravity="left|center" android:id="@id/carrier" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:singleLine="true" />
+    <include layout="@layout/zz_moto_keyguard_bottom_land" />
+</LinearLayout>
