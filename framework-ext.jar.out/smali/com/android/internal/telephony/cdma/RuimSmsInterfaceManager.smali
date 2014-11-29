@@ -1,5 +1,5 @@
 .class public Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager;
-.super Lcom/android/internal/telephony/IccSmsInterfaceManager;
+.super Lcom/android/internal/telephony/IccSmsInterfaceManagerBaidu;
 .source "RuimSmsInterfaceManager.java"
 
 
@@ -45,24 +45,20 @@
     .parameter "dispatcher"
 
     .prologue
-    .line 169
-    invoke-direct {p0, p1}, Lcom/android/internal/telephony/IccSmsInterfaceManager;-><init>(Lcom/android/internal/telephony/PhoneBase;)V
+    invoke-direct {p0, p1}, Lcom/android/internal/telephony/IccSmsInterfaceManagerBaidu;-><init>(Lcom/android/internal/telephony/PhoneBase;)V
 
-    .line 57
     new-instance v0, Ljava/lang/Object;
 
     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager;->mLock:Ljava/lang/Object;
 
-    .line 71
     new-instance v0, Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager$1;
 
     invoke-direct {v0, p0}, Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager$1;-><init>(Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager;)V
 
     iput-object v0, p0, Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager;->mHandler:Landroid/os/Handler;
 
-    .line 172
     invoke-static {}, Lcom/android/internal/telephony/BaseCommands;->getLteOnCdmaModeStatic()I
 
     move-result v0
@@ -408,13 +404,11 @@
     .locals 3
 
     .prologue
-    .line 197
     :try_start_0
-    invoke-super {p0}, Landroid/os/Binder;->finalize()V
+    invoke-super {p0}, Lcom/android/internal/telephony/IccSmsInterfaceManagerBaidu;->finalize()V
     :try_end_0
     .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 201
     :goto_0
     const-string v1, "CDMA"
 
@@ -1022,3 +1016,14 @@
 
     goto :goto_0
 .end method
+
+# Remove the first '#' if you want to enable this method. It might be invoked from codes of BOSP.
+#.method static synthetic access$invoke-buildValidRawData-44abf0(Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager;Ljava/util/ArrayList;)Ljava/util/ArrayList;
+#    .locals 1
+#    .parameter "x0"
+#    .parameter "x1"
+#    .prologue
+#    invoke-virtual {p0, p1}, Lcom/android/internal/telephony/cdma/RuimSmsInterfaceManager;->buildValidRawData(Ljava/util/ArrayList;)Ljava/util/ArrayList;
+#    move-result-object v0
+#    return-object v0
+#.end method

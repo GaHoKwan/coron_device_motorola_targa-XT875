@@ -2007,43 +2007,6 @@
     return-void
 .end method
 
-.method public setStatusBarTransparent(Z)V
-    .locals 3
-    .parameter "isTransparent"
-
-    .prologue
-    .line 622
-    iget-object v1, p0, Lcom/android/server/StatusBarManagerService;->mLock:Ljava/lang/Object;
-
-    monitor-enter v1
-
-    .line 623
-    :try_start_0
-    iget-object v0, p0, Lcom/android/server/StatusBarManagerService;->mHandler:Landroid/os/Handler;
-
-    new-instance v2, Lcom/android/server/StatusBarManagerService$8;
-
-    invoke-direct {v2, p0, p1}, Lcom/android/server/StatusBarManagerService$8;-><init>(Lcom/android/server/StatusBarManagerService;Z)V
-
-    invoke-virtual {v0, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
-
-    .line 633
-    monitor-exit v1
-
-    .line 634
-    return-void
-
-    .line 633
-    :catchall_0
-    move-exception v0
-
-    monitor-exit v1
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    throw v0
-.end method
-
 .method public setSystemUiVisibility(II)V
     .locals 4
     .parameter "vis"

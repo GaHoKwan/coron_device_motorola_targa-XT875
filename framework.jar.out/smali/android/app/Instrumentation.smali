@@ -1102,23 +1102,35 @@
     .parameter "options"
 
     .prologue
-    .line 1432
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    move-object/from16 v2, p5
+
+    invoke-direct {v0, v1, v2}, Landroid/app/Instrumentation;->checkDynamicPermission(Landroid/content/Context;[Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_baidu_0
+
+    goto :goto_baidu_0
+
+    :cond_baidu_0
+
     move-object v1, p2
 
     check-cast v1, Landroid/app/IApplicationThread;
 
-    .line 1433
     .local v1, whoThread:Landroid/app/IApplicationThread;
     iget-object v0, p0, Landroid/app/Instrumentation;->mActivityMonitors:Ljava/util/List;
 
     if-eqz v0, :cond_2
 
-    .line 1434
     iget-object v2, p0, Landroid/app/Instrumentation;->mSync:Ljava/lang/Object;
 
     monitor-enter v2
 
-    .line 1435
     :try_start_0
     iget-object v0, p0, Landroid/app/Instrumentation;->mActivityMonitors:Ljava/util/List;
 
@@ -1157,31 +1169,27 @@
 
     if-eqz v0, :cond_0
 
-    .line 1439
     iget v0, v7, Landroid/app/Instrumentation$ActivityMonitor;->mHits:I
 
     add-int/lit8 v0, v0, 0x1
 
     iput v0, v7, Landroid/app/Instrumentation$ActivityMonitor;->mHits:I
 
-    .line 1440
     invoke-virtual {v7}, Landroid/app/Instrumentation$ActivityMonitor;->isBlocking()Z
 
     move-result v0
 
     if-eqz v0, :cond_1
 
-    .line 1441
     monitor-exit v2
 
-    .line 1459
     .end local v6           #N:I
     .end local v7           #am:Landroid/app/Instrumentation$ActivityMonitor;
     .end local v8           #i:I
     :goto_1
+    :goto_baidu_0
     return-void
 
-    .line 1436
     .restart local v6       #N:I
     .restart local v7       #am:Landroid/app/Instrumentation$ActivityMonitor;
     .restart local v8       #i:I
@@ -1308,12 +1316,28 @@
     .parameter "options"
 
     .prologue
-    .line 1392
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    move-object/from16 v2, p5
+
+    invoke-direct {v0, v1, v2}, Landroid/app/Instrumentation;->checkDynamicPermission(Landroid/content/Context;Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_baidu_0
+
+    const/4 v2, 0x0
+
+    goto :goto_baidu_0
+
+    :cond_baidu_0
+
     move-object/from16 v3, p2
 
     check-cast v3, Landroid/app/IApplicationThread;
 
-    .line 1393
     .local v3, whoThread:Landroid/app/IApplicationThread;
     move-object/from16 v0, p0
 
@@ -1395,14 +1419,13 @@
     :goto_1
     monitor-exit v4
 
-    .line 1419
     .end local v13           #N:I
     .end local v14           #am:Landroid/app/Instrumentation$ActivityMonitor;
     .end local v15           #i:I
     :goto_2
+    :goto_baidu_0
     return-object v2
 
-    .line 1401
     .restart local v13       #N:I
     .restart local v14       #am:Landroid/app/Instrumentation$ActivityMonitor;
     .restart local v15       #i:I
@@ -1530,12 +1553,28 @@
     .parameter "options"
 
     .prologue
-    .line 1491
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    move-object/from16 v2, p5
+
+    invoke-direct {v0, v1, v2}, Landroid/app/Instrumentation;->checkDynamicPermission(Landroid/content/Context;Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_baidu_0
+
+    const/4 v2, 0x0
+
+    goto :goto_baidu_0
+
+    :cond_baidu_0
+
     move-object/from16 v3, p2
 
     check-cast v3, Landroid/app/IApplicationThread;
 
-    .line 1492
     .local v3, whoThread:Landroid/app/IApplicationThread;
     move-object/from16 v0, p0
 
@@ -1617,14 +1656,13 @@
     :goto_1
     monitor-exit v4
 
-    .line 1518
     .end local v13           #N:I
     .end local v14           #am:Landroid/app/Instrumentation$ActivityMonitor;
     .end local v15           #i:I
     :goto_2
+    :goto_baidu_0
     return-object v2
 
-    .line 1500
     .restart local v13       #N:I
     .restart local v14       #am:Landroid/app/Instrumentation$ActivityMonitor;
     .restart local v15       #i:I
@@ -3335,4 +3373,72 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v1
+.end method
+
+
+.method private checkDynamicPermission(Landroid/content/Context;Landroid/content/Intent;)Z
+    .locals 2
+    .parameter "context"
+    .parameter "intent"
+
+    .prologue
+    invoke-static {p1}, Lcom/baidu/server/dp/DynamicPermissionManager;->getInstance(Landroid/content/Context;)Lcom/baidu/server/dp/DynamicPermissionManager;
+
+    move-result-object v0
+
+    .local v0, dpm:Lcom/baidu/server/dp/DynamicPermissionManager;
+    invoke-virtual {v0, p2}, Lcom/baidu/server/dp/DynamicPermissionManager;->checkCallPermission(Landroid/content/Intent;)I
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    const/4 v1, 0x1
+
+    :goto_0
+    return v1
+
+    :cond_0
+    const/4 v1, 0x0
+
+    goto :goto_0
+.end method
+
+.method private checkDynamicPermission(Landroid/content/Context;[Landroid/content/Intent;)Z
+    .locals 5
+    .parameter "context"
+    .parameter "intents"
+
+    .prologue
+    const/4 v3, 0x1
+
+    const/4 v2, 0x0
+
+    invoke-static {p1}, Lcom/baidu/server/dp/DynamicPermissionManager;->getInstance(Landroid/content/Context;)Lcom/baidu/server/dp/DynamicPermissionManager;
+
+    move-result-object v0
+
+    .local v0, dpm:Lcom/baidu/server/dp/DynamicPermissionManager;
+    new-array v1, v3, [[Landroid/content/Intent;
+
+    .local v1, intentsContainer:[[Landroid/content/Intent;
+    invoke-virtual {v0, p2, v1}, Lcom/baidu/server/dp/DynamicPermissionManager;->checkCallPermission([Landroid/content/Intent;[[Landroid/content/Intent;)I
+
+    move-result v4
+
+    if-eqz v4, :cond_0
+
+    aget-object p2, v1, v2
+
+    array-length v4, p2
+
+    if-nez v4, :cond_0
+
+    :goto_0
+    return v2
+
+    :cond_0
+    move v2, v3
+
+    goto :goto_0
 .end method

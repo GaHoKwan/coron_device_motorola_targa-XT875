@@ -18,6 +18,8 @@
         Landroid/widget/Editor$InsertionHandleView;,
         Landroid/widget/Editor$HandleView;,
         Landroid/widget/Editor$MouseActionPopupWindow;,
+        Landroid/widget/Editor$BaiduClipboardPopupWindow;,
+        Landroid/widget/Editor$BaiduActionPopupWindow;,
         Landroid/widget/Editor$ActionPopupWindow;,
         Landroid/widget/Editor$SelectionActionModeCallback;,
         Landroid/widget/Editor$SuggestionsPopupWindow;,
@@ -27,7 +29,8 @@
         Landroid/widget/Editor$EasyEditSpanController;,
         Landroid/widget/Editor$DragLocalState;,
         Landroid/widget/Editor$Blink;,
-        Landroid/widget/Editor$TextViewPositionListener;
+        Landroid/widget/Editor$TextViewPositionListener;,
+        Landroid/widget/Editor$BaiduEditorInjector;
     }
 .end annotation
 
@@ -102,6 +105,8 @@
 .field private mPositionListener:Landroid/widget/Editor$PositionListener;
 
 .field mPreserveDetachedSelection:Z
+
+.field public mSearchText:Ljava/lang/CharSequence;
 
 .field mSelectAllOnFocus:Z
 
@@ -542,7 +547,7 @@
 
     move-result-object v1
 
-    const v2, 0x1050049
+    const v2, #android:dimen@textview_error_popup_default_width#t
 
     invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
@@ -2229,7 +2234,7 @@
 
     move-result-object v2
 
-    const v3, 0x10900b7
+    const v3, #android:layout@text_drag_thumbnail#t
 
     const/4 v4, 0x0
 
@@ -3412,7 +3417,7 @@
 
     .line 295
     .local v1, inflater:Landroid/view/LayoutInflater;
-    const v4, 0x10900bf
+    const v4, #android:layout@textview_hint#t
 
     const/4 v5, 0x0
 
@@ -4356,13 +4361,11 @@
     .locals 2
 
     .prologue
-    .line 674
     iget-object v0, p0, Landroid/widget/Editor;->mWordIterator:Landroid/text/method/WordIterator;
 
     if-nez v0, :cond_0
 
-    .line 675
-    new-instance v0, Landroid/text/method/WordIterator;
+    new-instance v0, Landroid/text/method/BaiduWordIterator;
 
     iget-object v1, p0, Landroid/widget/Editor;->mTextView:Landroid/widget/TextView;
 
@@ -4370,7 +4373,7 @@
 
     move-result-object v1
 
-    invoke-direct {v0, v1}, Landroid/text/method/WordIterator;-><init>(Ljava/util/Locale;)V
+    invoke-direct {v0, v1}, Landroid/text/method/BaiduWordIterator;-><init>(Ljava/util/Locale;)V
 
     iput-object v0, p0, Landroid/widget/Editor;->mWordIterator:Landroid/text/method/WordIterator;
 
@@ -6953,7 +6956,8 @@
     .parameter "handled"
 
     .prologue
-    .line 805
+    invoke-static/range {p0 .. p0}, Landroid/widget/Editor$BaiduEditorInjector;->onEventWordSearch(Landroid/widget/Editor;)V
+
     invoke-direct {p0}, Landroid/widget/Editor;->isWebtopMode()Z
 
     move-result v6
@@ -7898,9 +7902,7 @@
 
     .line 1560
     .local v6, top:I
-    add-int/lit8 v7, v3, 0x1
-
-    invoke-virtual {v2, v7}, Landroid/text/Layout;->getLineTop(I)I
+    invoke-static {p0, v3}, Landroid/widget/Editor$BaiduEditorInjector;->fixCursorPostion(Landroid/widget/Editor;I)I
 
     move-result v0
 

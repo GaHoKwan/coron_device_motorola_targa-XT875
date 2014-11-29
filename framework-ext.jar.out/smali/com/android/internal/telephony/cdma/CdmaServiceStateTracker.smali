@@ -1619,7 +1619,7 @@
 
     move-result-object v1
 
-    const v3, 0x111005e
+    const v3, #android:bool@config_support_eri#t
 
     invoke-virtual {v1, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -4085,7 +4085,7 @@
 
     move-result-object v8
 
-    const v9, 0x104010a
+    const v9, #android:string@roamingTextSearching#t
 
     invoke-virtual {v8, v9}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
 
@@ -12500,7 +12500,7 @@
 
     move-result-object v29
 
-    const v30, 0x104010a
+    const v30, #android:string@roamingTextSearching#t
 
     invoke-virtual/range {v29 .. v30}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
 
@@ -12586,7 +12586,7 @@
 
     move-result-object v29
 
-    const v30, 0x104010a
+    const v30, #android:string@roamingTextSearching#t
 
     invoke-virtual/range {v29 .. v30}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
 
@@ -13694,7 +13694,7 @@
 
     move-result-object v9
 
-    const v10, 0x1040311
+    const v10, #android:string@emergency_calls_only#t
 
     invoke-virtual {v9, v10}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
 
@@ -13963,6 +13963,10 @@
 
     .line 1022
     const-string v9, "plmn"
+
+    invoke-virtual {p0, v4}, Lcom/android/internal/telephony/cdma/CdmaServiceStateTracker;->updatePlmnOrSpnDisplay(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v4
 
     invoke-virtual {v2, v9, v4}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
 

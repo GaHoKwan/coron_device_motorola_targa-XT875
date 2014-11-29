@@ -10,6 +10,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/internal/policy/impl/GlobalActions$BaiduInjector;,
         Lcom/android/internal/policy/impl/GlobalActions$SilentModeTriStateAction;,
         Lcom/android/internal/policy/impl/GlobalActions$SilentModeToggleAction;,
         Lcom/android/internal/policy/impl/GlobalActions$ToggleAction;,
@@ -609,15 +610,15 @@
     :goto_0
     new-instance v1, Lcom/android/internal/policy/impl/GlobalActions$1;
 
-    const v3, 0x10802d8
+    const v3, #android:drawable@ic_lock_airplane_mode#t
 
-    const v4, 0x10802d9
+    const v4, #android:drawable@ic_lock_airplane_mode_off#t
 
-    const v5, 0x104013c
+    const v5, #android:string@global_actions_toggle_airplane_mode#t
 
-    const v6, 0x104013d
+    const v6, #android:string@global_actions_airplane_mode_on_status#t
 
-    const v7, 0x104013e
+    const v7, #android:string@global_actions_airplane_mode_off_status#t
 
     move-object/from16 v2, p0
 
@@ -646,9 +647,9 @@
 
     new-instance v2, Lcom/android/internal/policy/impl/GlobalActions$2;
 
-    const v3, 0x1080030
+    const v3, #android:drawable@ic_lock_power_off#t
 
-    const v4, 0x1040138
+    const v4, #android:string@global_action_power_off#t
 
     move-object/from16 v0, p0
 
@@ -656,7 +657,8 @@
 
     invoke-virtual {v1, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 228
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/GlobalActions$BaiduInjector;->addRebootMenu(Lcom/android/internal/policy/impl/GlobalActions;)V
+
     move-object/from16 v0, p0
 
     iget-object v1, v0, Lcom/android/internal/policy/impl/GlobalActions;->mItems:Ljava/util/ArrayList;
@@ -667,7 +669,8 @@
 
     invoke-virtual {v1, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 232
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/GlobalActions$BaiduInjector;->addScreenShotMenu(Lcom/android/internal/policy/impl/GlobalActions;)V
+
     move-object/from16 v0, p0
 
     iget-object v1, v0, Lcom/android/internal/policy/impl/GlobalActions;->mItems:Ljava/util/ArrayList;
@@ -678,7 +681,7 @@
 
     invoke-virtual {v1, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 235
+    .line 228
     move-object/from16 v0, p0
 
     iget-object v1, v0, Lcom/android/internal/policy/impl/GlobalActions;->mContext:Landroid/content/Context;
@@ -691,7 +694,6 @@
 
     move-result-object v16
 
-    .line 236
     .local v16, users:Ljava/util/List;,"Ljava/util/List<Landroid/content/pm/UserInfo;>;"
     invoke-interface/range {v16 .. v16}, Ljava/util/List;->size()I
 
@@ -701,7 +703,6 @@
 
     if-le v1, v2, :cond_6
 
-    .line 239
     :try_start_0
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
@@ -713,7 +714,6 @@
 
     move-result-object v9
 
-    .line 243
     .local v9, currentUser:Landroid/content/pm/UserInfo;
     :goto_1
     invoke-interface/range {v16 .. v16}, Ljava/util/List;->iterator()Ljava/util/Iterator;
@@ -734,7 +734,6 @@
 
     check-cast v15, Landroid/content/pm/UserInfo;
 
-    .line 244
     .local v15, user:Landroid/content/pm/UserInfo;
     if-nez v9, :cond_2
 
@@ -744,12 +743,11 @@
 
     const/4 v12, 0x1
 
-    .line 246
     .local v12, isCurrentUser:Z
     :goto_3
     new-instance v14, Lcom/android/internal/policy/impl/GlobalActions$3;
 
-    const v2, 0x108031d
+    const v2, #android:drawable@ic_menu_cc#t
 
     new-instance v3, Ljava/lang/StringBuilder;
 
@@ -779,11 +777,11 @@
 
     move-result-object v1
 
+    .line 232
     move-object/from16 v0, p0
 
     invoke-direct {v14, v0, v2, v1, v15}, Lcom/android/internal/policy/impl/GlobalActions$3;-><init>(Lcom/android/internal/policy/impl/GlobalActions;ILjava/lang/CharSequence;Landroid/content/pm/UserInfo;)V
 
-    .line 267
     .local v14, switchToUser:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
     move-object/from16 v0, p0
 
@@ -793,7 +791,6 @@
 
     goto :goto_2
 
-    .line 155
     .end local v9           #currentUser:Landroid/content/pm/UserInfo;
     .end local v11           #i$:Ljava/util/Iterator;
     .end local v12           #isCurrentUser:Z
@@ -803,6 +800,7 @@
     :cond_0
     new-instance v1, Lcom/android/internal/policy/impl/GlobalActions$SilentModeTriStateAction;
 
+    .line 235
     move-object/from16 v0, p0
 
     iget-object v2, v0, Lcom/android/internal/policy/impl/GlobalActions;->mContext:Landroid/content/Context;
@@ -823,19 +821,16 @@
 
     goto/16 :goto_0
 
-    .line 240
     .restart local v16       #users:Ljava/util/List;,"Ljava/util/List<Landroid/content/pm/UserInfo;>;"
     :catch_0
     move-exception v13
 
-    .line 241
     .local v13, re:Landroid/os/RemoteException;
     const/4 v9, 0x0
 
     .restart local v9       #currentUser:Landroid/content/pm/UserInfo;
     goto :goto_1
 
-    .line 244
     .end local v13           #re:Landroid/os/RemoteException;
     .restart local v11       #i$:Ljava/util/Iterator;
     .restart local v15       #user:Landroid/content/pm/UserInfo;
@@ -860,7 +855,6 @@
 
     goto :goto_3
 
-    .line 246
     .restart local v12       #isCurrentUser:Z
     :cond_4
     const-string v1, "Primary"
@@ -872,6 +866,7 @@
 
     goto :goto_5
 
+    .line 155
     .line 271
     .end local v9           #currentUser:Landroid/content/pm/UserInfo;
     .end local v11           #i$:Ljava/util/Iterator;

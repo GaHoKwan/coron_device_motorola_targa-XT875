@@ -7,6 +7,14 @@
 .implements Lcom/android/internal/policy/impl/KeyguardScreen;
 
 
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/android/internal/policy/impl/PasswordUnlockScreen$BaiduInjector;
+    }
+.end annotation
+
+
 # static fields
 .field private static final MINIMUM_PASSWORD_LENGTH_BEFORE_REPORT:I = 0x3
 
@@ -129,14 +137,12 @@
 
     if-eq v1, v2, :cond_4
 
-    .line 115
-    const v1, 0x1090052
+    const v1, #android:layout@keyguard_screen_password_portrait#t
 
     const/4 v2, 0x1
 
     invoke-virtual {v9, v1, p0, v2}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;
 
-    .line 120
     :goto_0
     new-instance v1, Lcom/android/internal/policy/impl/KeyguardStatusViewManager;
 
@@ -179,8 +185,7 @@
     :goto_1
     iput-boolean v1, p0, Lcom/android/internal/policy/impl/PasswordUnlockScreen;->mIsAlpha:Z
 
-    .line 128
-    const v1, 0x1020215
+    const v1, #android:id@keyboard#t
 
     invoke-virtual {p0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -190,8 +195,7 @@
 
     iput-object v1, p0, Lcom/android/internal/policy/impl/PasswordUnlockScreen;->mKeyboardView:Lcom/android/internal/widget/PasswordEntryKeyboardView;
 
-    .line 129
-    const v1, 0x10202ad
+    const v1, #android:id@passwordEntry#t
 
     invoke-virtual {p0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -309,14 +313,12 @@
 
     invoke-virtual {v1, v2}, Landroid/widget/TextView;->addTextChangedListener(Landroid/text/TextWatcher;)V
 
-    .line 223
-    const v1, 0x10202af
+    const v1, #android:id@switch_ime_button#t
 
     invoke-virtual {p0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
     move-result-object v14
 
-    .line 224
     .local v14, switchImeButton:Landroid/view/View;
     invoke-virtual {p0}, Landroid/view/View;->getContext()Landroid/content/Context;
 
@@ -403,7 +405,7 @@
     .end local v13           #quality:I
     .end local v14           #switchImeButton:Landroid/view/View;
     :cond_4
-    const v1, 0x1090051
+    const v1, #android:layout@keyguard_screen_password_landscape#t
 
     const/4 v2, 0x1
 
@@ -449,7 +451,7 @@
 
     .line 172
     :goto_4
-    const v1, 0x10202ae
+    const v1, #android:id@pinDel#t
 
     invoke-virtual {p0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -804,7 +806,7 @@
     .prologue
     const/4 v8, 0x0
 
-    const v7, 0x1040300
+    const v7, #android:string@lockscreen_password_wrong#t
 
     const/4 v5, 0x1
 
@@ -1331,4 +1333,14 @@
 
     .line 338
     return-void
+.end method
+
+.method static synthetic access$iget-mLockPatternUtils-18168b(Lcom/android/internal/policy/impl/PasswordUnlockScreen;)Lcom/android/internal/widget/LockPatternUtils;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PasswordUnlockScreen;->mLockPatternUtils:Lcom/android/internal/widget/LockPatternUtils;
+
+    return-object v0
 .end method

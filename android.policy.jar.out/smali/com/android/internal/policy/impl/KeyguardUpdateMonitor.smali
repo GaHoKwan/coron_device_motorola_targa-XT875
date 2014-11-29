@@ -9,6 +9,9 @@
         Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$SimStateCallback;,
         Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallbackImpl;,
         Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$InfoCallback;,
+	Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduInjector;,
+        Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;,
+        Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;,
         Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BatteryStatus;,
         Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$SimArgs;
     }
@@ -50,6 +53,10 @@
 
 
 # instance fields
+.field private mBaiduBroadcastReceiver:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;
+
+.field private mBaiduHandler:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;
+
 .field private mBatteryStatus:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BatteryStatus;
 
 .field private mClockVisible:Z
@@ -127,53 +134,44 @@
 
     const/4 v4, 0x0
 
-    .line 197
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 82
     sget-object v2, Lcom/android/internal/telephony/IccCard$State;->READY:Lcom/android/internal/telephony/IccCard$State;
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mSimState:Lcom/android/internal/telephony/IccCard$State;
 
-    .line 91
     iput v4, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mFailedAttempts:I
 
-    .line 92
     iput v4, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mFailedBiometricUnlockAttempts:I
 
-    .line 98
     iput-boolean v4, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mInSecurityTimeoutPeriod:Z
 
-    .line 100
     invoke-static {}, Lcom/google/android/collect/Lists;->newArrayList()Ljava/util/ArrayList;
 
     move-result-object v2
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mInfoCallbacks:Ljava/util/ArrayList;
 
-    .line 101
     invoke-static {}, Lcom/google/android/collect/Lists;->newArrayList()Ljava/util/ArrayList;
 
     move-result-object v2
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mSimStateCallbacks:Ljava/util/ArrayList;
 
-    .line 125
     const/4 v2, 0x0
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mMotoEncryptionManager:Lcom/motorola/android/internal/encryption/EncryptionAdminManager;
 
-    .line 198
     iput-object p1, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mContext:Landroid/content/Context;
 
-    .line 200
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduInjector;->initExtParams(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
+
     new-instance v2, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$1;
 
     invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$1;-><init>(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mHandler:Landroid/os/Handler;
 
-    .line 238
     iget-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mContext:Landroid/content/Context;
 
     invoke-virtual {v2}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
@@ -285,100 +283,84 @@
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mBatteryStatus:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BatteryStatus;
 
-    .line 277
     sget v2, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->PLUG_TYPE_UNKNOWN:I
 
     iput v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mPlugType:I
 
-    .line 280
     invoke-direct {p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getDefaultPlmn()Ljava/lang/CharSequence;
 
     move-result-object v2
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mTelephonyPlmn:Ljava/lang/CharSequence;
 
-    .line 283
     new-instance v0, Landroid/content/IntentFilter;
 
     invoke-direct {v0}, Landroid/content/IntentFilter;-><init>()V
 
-    .line 284
     .local v0, filter:Landroid/content/IntentFilter;
     const-string v2, "android.intent.action.TIME_TICK"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 285
     const-string v2, "android.intent.action.TIME_SET"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 286
     const-string v2, "android.intent.action.BATTERY_CHANGED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 287
     const-string v2, "android.intent.action.TIMEZONE_CHANGED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 288
     const-string v2, "android.intent.action.SIM_STATE_CHANGED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 289
     const-string v2, "android.intent.action.PHONE_STATE"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 290
     const-string v2, "android.provider.Telephony.SPN_STRINGS_UPDATED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 291
     const-string v2, "android.media.RINGER_MODE_CHANGED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 292
     const-string v2, "android.app.action.DEVICE_POLICY_MANAGER_STATE_CHANGED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 293
     const-string v2, "android.intent.action.USER_SWITCHED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 294
     const-string v2, "android.intent.action.USER_REMOVED"
 
     invoke-virtual {v0, v2}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V
 
-    .line 295
+    invoke-static {p0, v0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduInjector;->registerBaiduReceiver(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Landroid/content/IntentFilter;)V
+
     new-instance v2, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$3;
 
     invoke-direct {v2, p0}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$3;-><init>(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)V
 
     invoke-virtual {p1, v2, v0}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
 
-    .line 339
     return-void
 
     .end local v0           #filter:Landroid/content/IntentFilter;
     :cond_1
     move v2, v4
 
-    .line 238
     goto/16 :goto_0
 
     :cond_2
     move v1, v4
 
-    .line 263
     goto :goto_1
 .end method
 
@@ -547,7 +529,7 @@
 
     move-result-object v0
 
-    const v1, 0x10402f7
+    const v1, #android:string@lockscreen_carrier_default#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;
 
@@ -1871,4 +1853,46 @@
     const/4 v0, 0x0
 
     goto :goto_0
+.end method
+
+.method static synthetic access$iget-mBaiduHandler-cf8d20(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mBaiduHandler:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;
+
+    return-object v0
+.end method
+
+.method static synthetic access$iput-mBaiduHandler-7179d3(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;)Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    iput-object p1, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mBaiduHandler:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduHandler;
+
+    return-object p1
+.end method
+
+.method static synthetic access$iget-mBaiduBroadcastReceiver-b531d5(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;)Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mBaiduBroadcastReceiver:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;
+
+    return-object v0
+.end method
+
+.method static synthetic access$iput-mBaiduBroadcastReceiver-c2c5db(Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;)Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;
+    .locals 0
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    iput-object p1, p0, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->mBaiduBroadcastReceiver:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor$BaiduBroadcastReceiver;
+
+    return-object p1
 .end method

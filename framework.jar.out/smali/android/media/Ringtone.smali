@@ -242,7 +242,7 @@
 
     .line 128
     .local v6, actualTitle:Ljava/lang/String;
-    const v1, 0x1040400
+    const v1, #android:string@ringtone_default_with_actual#t
 
     new-array v2, v11, [Ljava/lang/Object;
 
@@ -260,28 +260,23 @@
     :goto_0
     if-nez v10, :cond_1
 
-    .line 159
-    const v1, 0x1040403
+    const v1, #android:string@ringtone_unknown#t
 
     invoke-virtual {p0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
     move-result-object v10
 
-    .line 161
     if-nez v10, :cond_1
 
-    .line 162
     const-string v10, ""
 
     :cond_1
     move-object v1, v10
 
-    .line 166
     :cond_2
     :goto_1
     return-object v1
 
-    .line 134
     .restart local v8       #authority:Ljava/lang/String;
     :cond_3
     :try_start_0
@@ -590,6 +585,10 @@
 
     iget-object v2, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
 
+    if-eqz v3, :cond_baidu_0
+
+    iget-object v3, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
+
     iget v3, p0, Landroid/media/Ringtone;->mStreamType:I
 
     invoke-interface {v0, v1, v2, v3}, Landroid/media/IRingtonePlayer;->play(Landroid/os/IBinder;Landroid/net/Uri;I)V
@@ -631,6 +630,7 @@
     .line 236
     .end local v8           #e:Landroid/os/RemoteException;
     :cond_2
+    :cond_baidu_0
     const-string v0, "Ringtone"
 
     const-string v1, "Neither local nor remote playback available"
@@ -698,38 +698,30 @@
 
     if-nez v0, :cond_5
 
-    .line 265
     iget-object v0, p0, Landroid/media/Ringtone;->mUri:Landroid/net/Uri;
 
     invoke-static {v0}, Landroid/media/RingtoneManager;->getDefaultType(Landroid/net/Uri;)I
 
     move-result v11
 
-    .line 266
     .local v11, type:I
     const/4 v10, 0x2
 
-    .line 267
     .local v10, stream:I
-    const v9, 0x1100006
+    const v9, #android:raw@zz_moto_fallbacknotification#t
 
-    .line 269
     .local v9, id:I
     packed-switch v11, :pswitch_data_0
 
-    .line 282
     :pswitch_0
     iget v0, p0, Landroid/media/Ringtone;->mStreamType:I
 
     if-ne v0, v3, :cond_7
 
-    .line 283
     const/4 v10, 0x4
 
-    .line 284
-    const v9, 0x1100005
+    const v9, #android:raw@zz_moto_fallbackalarm#t
 
-    .line 291
     :cond_4
     :goto_3
     new-instance v0, Landroid/media/MediaPlayer;
@@ -774,20 +766,17 @@
 
     invoke-virtual {v0, v1}, Landroid/media/MediaPlayer;->setDataSource(Ljava/io/FileDescriptor;)V
 
-    .line 302
     :goto_4
     iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v0, v10}, Landroid/media/MediaPlayer;->setAudioStreamType(I)V
 
-    .line 303
     iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
     invoke-virtual {v0}, Landroid/media/MediaPlayer;->prepare()V
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_2
 
-    .line 313
     .end local v6           #afd:Landroid/content/res/AssetFileDescriptor;
     .end local v9           #id:I
     .end local v10           #stream:I
@@ -857,30 +846,22 @@
     :pswitch_1
     const/4 v10, 0x4
 
-    .line 272
-    const v9, 0x1100005
+    const v9, #android:raw@zz_moto_fallbackalarm#t
 
-    .line 273
     goto :goto_3
 
-    .line 275
     :pswitch_2
     const/4 v10, 0x2
 
-    .line 276
-    const v9, 0x1100007
+    const v9, #android:raw@zz_moto_fallbackring#t
 
-    .line 277
     goto :goto_3
 
-    .line 279
     :pswitch_3
     const/4 v10, 0x5
 
-    .line 280
     goto :goto_3
 
-    .line 285
     :cond_7
     iget v0, p0, Landroid/media/Ringtone;->mStreamType:I
 

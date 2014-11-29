@@ -787,9 +787,9 @@
 
     check-cast v0, Landroid/view/LayoutInflater;
 
-    const v2, 0x10900e1
+    const v2, #android:layout@zz_moto_toast_layout#t
 
-    const v1, 0x1020364
+    const v1, #android:id@toast_layout_root#t
 
     invoke-virtual {p0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -806,7 +806,7 @@
     .line 919
     iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mToastView:Landroid/view/View;
 
-    const v1, 0x102039a
+    const v1, #android:id@toastMessage#t
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -1096,31 +1096,26 @@
     :goto_0
     iput-boolean v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mSuppressBiometricUnlock:Z
 
-    .line 1362
     :cond_2
     const/4 v2, 0x0
 
     iput-object v2, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mBiometricUnlock:Lcom/android/internal/policy/impl/BiometricSensorUnlock;
 
-    .line 1363
     invoke-direct {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->useBiometricUnlock()Z
 
     move-result v2
 
     if-eqz v2, :cond_3
 
-    .line 1367
-    const v2, 0x10202b0
+    const v2, #android:id@faceLockAreaView#t
 
     invoke-virtual {p1, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
 
-    .line 1368
     .local v0, biometricUnlockView:Landroid/view/View;
     if-eqz v0, :cond_6
 
-    .line 1369
     new-instance v2, Lcom/android/internal/policy/impl/FaceUnlock;
 
     iget-object v3, p0, Landroid/view/View;->mContext:Landroid/content/Context;
@@ -1191,8 +1186,7 @@
     .parameter "view"
 
     .prologue
-    .line 1316
-    const v0, 0x10202b2
+    const v0, #android:id@transport#t
 
     invoke-virtual {p1, v0}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -1845,7 +1839,7 @@
     .local v0, count:I
     iget-object v3, p0, Landroid/view/View;->mContext:Landroid/content/Context;
 
-    const v4, 0x104031a
+    const v4, #android:string@lockscreen_failed_attempts_almost_glogin#t
 
     const/4 v5, 0x3
 
@@ -1908,7 +1902,7 @@
     .local v1, timeoutInSeconds:I
     iget-object v2, p0, Landroid/view/View;->mContext:Landroid/content/Context;
 
-    const v3, 0x104031b
+    const v3, #android:string@lockscreen_failed_attempts_almost_at_wipe#t
 
     const/4 v4, 0x2
 
@@ -1970,7 +1964,7 @@
 
     move-result-object v1
 
-    const v2, 0x104000a
+    const v2, #android:string@ok#t
 
     const/4 v3, 0x0
 
@@ -2006,7 +2000,7 @@
     .line 1462
     iget-object v2, p0, Landroid/view/View;->mContext:Landroid/content/Context;
 
-    const v3, 0x10405cc
+    const v3, #android:string@password_recovery_dialog_title#t
 
     invoke-virtual {v2, v3}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
@@ -2016,7 +2010,7 @@
     .local v1, title:Ljava/lang/String;
     iget-object v2, p0, Landroid/view/View;->mContext:Landroid/content/Context;
 
-    const v3, 0x10405cd
+    const v3, #android:string@password_recovery_dialog_message#t
 
     invoke-virtual {v2, v3}, Landroid/content/Context;->getString(I)Ljava/lang/String;
 
@@ -2034,14 +2028,11 @@
     .locals 7
 
     .prologue
-    .line 1469
     const/16 v2, 0x1e
 
-    .line 1470
     .local v2, timeoutInSeconds:I
-    const v1, 0x1040317
+    const v1, #android:string@lockscreen_too_many_failed_attempts_dialog_message#t
 
-    .line 1471
     .local v1, messageId:I
     invoke-direct {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->getUnlockMode()Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
 
@@ -2062,10 +2053,8 @@
 
     if-ne v3, v4, :cond_1
 
-    .line 1474
-    const v1, 0x1040319
+    const v1, #android:string@lockscreen_too_many_failed_pin_attempts_dialog_message#t
 
-    .line 1479
     :cond_0
     :goto_0
     iget-object v3, p0, Landroid/view/View;->mContext:Landroid/content/Context;
@@ -2112,7 +2101,7 @@
     .line 1476
     .end local v0           #message:Ljava/lang/String;
     :cond_1
-    const v1, 0x1040318
+    const v1, #android:string@lockscreen_too_many_failed_password_attempts_dialog_message#t
 
     goto :goto_0
 .end method
@@ -2125,7 +2114,7 @@
     .line 1502
     iget-object v1, p0, Landroid/view/View;->mContext:Landroid/content/Context;
 
-    const v2, 0x104031c
+    const v2, #android:string@lockscreen_failed_attempts_now_wiping#t
 
     const/4 v3, 0x1
 
@@ -2636,8 +2625,7 @@
     .locals 6
 
     .prologue
-    .line 1235
-    new-instance v0, Lcom/android/internal/policy/impl/LockScreen;
+    #new-instance v0, Lcom/android/internal/policy/impl/LockScreen;
 
     iget-object v1, p0, Landroid/view/View;->mContext:Landroid/content/Context;
 
@@ -2649,7 +2637,9 @@
 
     iget-object v5, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mKeyguardScreenCallback:Lcom/android/internal/policy/impl/KeyguardScreenCallback;
 
-    invoke-direct/range {v0 .. v5}, Lcom/android/internal/policy/impl/LockScreen;-><init>(Landroid/content/Context;Landroid/content/res/Configuration;Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardScreenCallback;)V
+    invoke-static {v1, v2, v3, v4, v5}, Lcom/android/internal/policy/impl/BaiduKeyguardManager;->createLockScreen(Landroid/content/Context;Landroid/content/res/Configuration;Lcom/android/internal/widget/LockPatternUtils;Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;Lcom/android/internal/policy/impl/KeyguardScreenCallback;)Landroid/view/View;
+
+    move-result-object v0
 
     .line 1241
     .local v0, lockView:Landroid/view/View;
@@ -3009,7 +2999,7 @@
 
     .line 954
     .local v0, resources:Landroid/content/res/Resources;
-    const v1, 0x111001f
+    const v1, #android:bool@config_enableLockBeforeUnlockScreen#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 

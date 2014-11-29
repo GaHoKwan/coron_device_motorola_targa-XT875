@@ -48,8 +48,6 @@
 
 .field static final TRANSACTION_setImeWindowStatus:I = 0xb
 
-.field static final TRANSACTION_setStatusBarTransparent:I = 0x10
-
 .field static final TRANSACTION_setSystemUiVisibility:I = 0x9
 
 .field static final TRANSACTION_toggleRecentApps:I = 0xd
@@ -70,7 +68,7 @@
     .line 16
     const-string v0, "com.android.internal.statusbar.IStatusBar"
 
-    invoke-virtual {p0, p0, v0}, Landroid/os/Binder;->attachInterface(Landroid/os/IInterface;Ljava/lang/String;)V
+    invoke-virtual {p0, p0, v0}, Lcom/android/internal/statusbar/IStatusBar$Stub;->attachInterface(Landroid/os/IInterface;Ljava/lang/String;)V
 
     .line 17
     return-void
@@ -152,7 +150,7 @@
     .line 39
     sparse-switch p1, :sswitch_data_0
 
-    .line 194
+    .line 186
     invoke-super {p0, p1, p2, p3, p4}, Landroid/os/Binder;->onTransact(ILandroid/os/Parcel;Landroid/os/Parcel;I)Z
 
     move-result v3
@@ -547,38 +545,7 @@
 
     goto/16 :goto_0
 
-    .line 187
-    :sswitch_10
-    const-string v5, "com.android.internal.statusbar.IStatusBar"
-
-    invoke-virtual {p2, v5}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
-
-    .line 189
-    invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
-
-    move-result v5
-
-    if-eqz v5, :cond_6
-
-    move v0, v3
-
-    .line 190
-    .restart local v0       #_arg0:Z
-    :goto_7
-    invoke-virtual {p0, v0}, Lcom/android/internal/statusbar/IStatusBar$Stub;->setStatusBarTransparent(Z)V
-
-    goto/16 :goto_0
-
-    .end local v0           #_arg0:Z
-    :cond_6
-    move v0, v4
-
-    .line 189
-    goto :goto_7
-
     .line 39
-    nop
-
     :sswitch_data_0
     .sparse-switch
         0x1 -> :sswitch_1
@@ -596,7 +563,6 @@
         0xd -> :sswitch_d
         0xe -> :sswitch_e
         0xf -> :sswitch_f
-        0x10 -> :sswitch_10
         0x5f4e5446 -> :sswitch_0
     .end sparse-switch
 .end method

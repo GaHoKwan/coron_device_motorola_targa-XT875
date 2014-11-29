@@ -1683,20 +1683,22 @@
 
     move v8, v1
 
-    .line 456
     invoke-virtual/range {v0 .. v8}, Landroid/app/admin/DevicePolicyManager;->setActivePasswordState(IIIIIIII)V
 
-    .line 459
     invoke-virtual {v9, v1}, Lcom/motorola/motepm/MotDevicePolicyManager;->setActivePasswordComplexity(I)V
 
-    .line 463
     iget-object v2, p0, Lcom/android/internal/widget/LockPatternUtils;->mContentResolver:Landroid/content/ContentResolver;
 
     const-string v3, "lock_type"
 
     invoke-static {v2, v3, v1}, Lcom/motorola/android/provider/MotorolaSettings;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
 
-    .line 468
+    const-string v0, "lockscreen.lockmode_type"
+
+    const-wide/16 v1, 0x2
+
+    invoke-direct {p0, v0, v1, v2}, Lcom/android/internal/widget/LockPatternUtils;->setLong(Ljava/lang/String;J)V
+
     return-void
 .end method
 
@@ -3690,7 +3692,7 @@
 
     move-result-object v0
 
-    const v1, 0x1110028
+    const v1, #android:bool@config_voice_capable#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3710,7 +3712,7 @@
 
     move-result-object v0
 
-    const v1, 0x1110022
+    const v1, #android:bool@config_enable_emergency_call_while_sim_locked#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3993,7 +3995,7 @@
 
     move-result-object v0
 
-    const v1, 0x1110021
+    const v1, #android:bool@config_enable_puk_unlock_screen#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -5825,36 +5827,28 @@
 
     if-eqz p3, :cond_0
 
-    .line 1188
     invoke-virtual {p1, v4}, Landroid/view/View;->setVisibility(I)V
 
-    .line 1195
     const/4 v3, 0x2
 
     if-ne p2, v3, :cond_1
 
-    .line 1197
-    const v2, 0x10402fd
+    const v2, #android:string@lockscreen_return_to_call#t
 
-    .line 1198
     .local v2, textId:I
-    const v1, 0x1080084
+    const v1, #android:drawable@stat_sys_phone_call#t
 
-    .line 1199
     .local v1, phoneCallIcon:I
     invoke-virtual {p1, v1, v4, v4, v4}, Landroid/widget/TextView;->setCompoundDrawablesWithIntrinsicBounds(IIII)V
 
-    .line 1205
     .end local v1           #phoneCallIcon:I
     :goto_0
     invoke-virtual {p1, v2}, Landroid/widget/TextView;->setText(I)V
 
-    .line 1206
     .end local v2           #textId:I
     :goto_1
     return-void
 
-    .line 1190
     :cond_0
     const/16 v3, 0x8
 
@@ -5862,15 +5856,12 @@
 
     goto :goto_1
 
-    .line 1201
     :cond_1
-    const v2, 0x10402fc
+    const v2, #android:string@lockscreen_emergency_call#t
 
-    .line 1202
     .restart local v2       #textId:I
-    const v0, 0x10802c7
+    const v0, #android:drawable@ic_emergency#t
 
-    .line 1203
     .local v0, emergencyIcon:I
     invoke-virtual {p1, v0, v4, v4, v4}, Landroid/widget/TextView;->setCompoundDrawablesWithIntrinsicBounds(IIII)V
 

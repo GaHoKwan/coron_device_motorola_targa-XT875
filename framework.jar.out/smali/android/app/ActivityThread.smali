@@ -28,7 +28,8 @@
         Landroid/app/ActivityThread$ReceiverData;,
         Landroid/app/ActivityThread$NewIntentData;,
         Landroid/app/ActivityThread$ProviderClientRecord;,
-        Landroid/app/ActivityThread$ActivityClientRecord;
+        Landroid/app/ActivityThread$ActivityClientRecord;,
+	Landroid/app/ActivityThread$BaiduInjector;
     }
 .end annotation
 
@@ -1237,7 +1238,7 @@
 
     .line 2869
     .local v3, res:Landroid/content/res/Resources;
-    const v6, 0x1050001
+    const v6, #android:dimen@thumbnail_height#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
@@ -1246,8 +1247,7 @@
     .local v2, h:I
     iput v2, p0, Landroid/app/ActivityThread;->mThumbnailHeight:I
 
-    .line 2872
-    const v6, 0x1050002
+    const v6, #android:dimen@thumbnail_width#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
@@ -2867,38 +2867,34 @@
 
     move-result-object v10
 
-    .line 4406
     .local v10, app:Landroid/app/Application;
     move-object/from16 v0, p0
 
     iput-object v10, v0, Landroid/app/ActivityThread;->mInitialApplication:Landroid/app/Application;
 
-    .line 4410
+    invoke-static/range {p0 .. p0}, Landroid/app/ActivityThread$BaiduInjector;->lockAppChannelNumberBaidu(Landroid/app/ActivityThread;)V
+
     move-object/from16 v0, p1
 
     iget-boolean v2, v0, Landroid/app/ActivityThread$AppBindData;->restrictedBackupMode:Z
 
     if-nez v2, :cond_f
 
-    .line 4411
     move-object/from16 v0, p1
 
     iget-object v0, v0, Landroid/app/ActivityThread$AppBindData;->providers:Ljava/util/List;
 
     move-object/from16 v21, v0
 
-    .line 4412
     .local v21, providers:Ljava/util/List;,"Ljava/util/List<Landroid/content/pm/ProviderInfo;>;"
     if-eqz v21, :cond_f
 
-    .line 4413
     move-object/from16 v0, p0
 
     move-object/from16 v1, v21
 
     invoke-direct {v0, v10, v1}, Landroid/app/ActivityThread;->installContentProviders(Landroid/content/Context;Ljava/util/List;)V
 
-    .line 4416
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H;
@@ -8482,50 +8478,41 @@
 
     invoke-static {v1, v2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 5035
     :cond_0
     invoke-static {}, Lcom/android/internal/os/SamplingProfilerIntegration;->start()V
 
-    .line 5040
     invoke-static {v5}, Ldalvik/system/CloseGuard;->setEnabled(Z)V
 
-    .line 5042
     const-string v1, "<pre-initialized>"
 
     invoke-static {v1}, Landroid/os/Process;->setArgV0(Ljava/lang/String;)V
 
-    .line 5044
     invoke-static {}, Landroid/os/Looper;->prepareMainLooper()V
 
-    .line 5045
     sget-object v1, Landroid/app/ActivityThread;->sMainThreadHandler:Landroid/os/Handler;
 
     if-nez v1, :cond_1
 
-    .line 5046
     new-instance v1, Landroid/os/Handler;
 
     invoke-direct {v1}, Landroid/os/Handler;-><init>()V
 
     sput-object v1, Landroid/app/ActivityThread;->sMainThreadHandler:Landroid/os/Handler;
 
-    .line 5049
     :cond_1
     new-instance v0, Landroid/app/ActivityThread;
 
     invoke-direct {v0}, Landroid/app/ActivityThread;-><init>()V
 
-    .line 5050
     .local v0, thread:Landroid/app/ActivityThread;
     invoke-direct {v0, v5}, Landroid/app/ActivityThread;->attach(Z)V
 
-    .line 5052
     invoke-static {}, Landroid/os/AsyncTask;->init()V
 
-    .line 5059
+    invoke-static {v0}, Landroid/app/ActivityThread$BaiduInjector;->multiTheme_freeCanvas(Landroid/app/ActivityThread;)V
+
     invoke-static {}, Landroid/os/Looper;->loop()V
 
-    .line 5061
     new-instance v1, Ljava/lang/RuntimeException;
 
     const-string v2, "Main thread loop unexpectedly exited"
@@ -11101,6 +11088,8 @@
     .end local v3           #r:Landroid/content/res/Resources;
     .end local v5           #v:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/content/res/Resources;>;"
     :cond_9
+    sput v0, Landroid/app/ActivityThread$BaiduInjector;->sMultiThemeChanges:I
+
     if-eqz v0, :cond_a
 
     :goto_2
@@ -12562,22 +12551,18 @@
     :cond_1
     move-object v4, v1
 
-    .line 1645
     goto :goto_0
 
-    .line 1654
     .restart local v4       #r:Landroid/content/res/Resources;
     :cond_2
     monitor-exit v7
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 1661
-    new-instance v0, Landroid/content/res/AssetManager;
+    new-instance v0, Landroid/content/res/BaiduAssetManager;
 
-    invoke-direct {v0}, Landroid/content/res/AssetManager;-><init>()V
+    invoke-direct {v0}, Landroid/content/res/BaiduAssetManager;-><init>()V
 
-    .line 1662
     .local v0, assets:Landroid/content/res/AssetManager;
     invoke-virtual {v0, p1}, Landroid/content/res/AssetManager;->addAssetPath(Ljava/lang/String;)I
 
@@ -12594,14 +12579,14 @@
 
     .line 1668
     .local v3, metrics:Landroid/util/DisplayMetrics;
-    new-instance v4, Landroid/content/res/Resources;
+    new-instance v4, Landroid/content/res/BaiduResources;
 
     .end local v4           #r:Landroid/content/res/Resources;
     invoke-virtual {p0}, Landroid/app/ActivityThread;->getConfiguration()Landroid/content/res/Configuration;
 
     move-result-object v6
 
-    invoke-direct {v4, v0, v3, v6, p2}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)V
+    invoke-direct {v4, v0, v3, v6, p2}, Landroid/content/res/BaiduResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)V
 
     .line 1675
     .restart local v4       #r:Landroid/content/res/Resources;
@@ -12936,6 +12921,14 @@
     check-cast v4, Landroid/content/ComponentCallbacks2;
 
     invoke-static {v4, p1}, Landroid/app/ActivityThread;->performConfigurationChanged(Landroid/content/ComponentCallbacks2;Landroid/content/res/Configuration;)V
+
+    invoke-virtual {v1, v3}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Landroid/content/ComponentCallbacks2;
+
+    invoke-static {v4}, Landroid/app/ActivityThread$BaiduInjector;->multiTheme_refreshFontCache(Landroid/content/ComponentCallbacks2;)V
 
     .line 3988
     add-int/lit8 v3, v3, 0x1

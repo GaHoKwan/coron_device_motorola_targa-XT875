@@ -1354,7 +1354,7 @@
 
     move-result-object v3
 
-    const v4, 0x1110007
+    const v4, #android:bool@config_sf_limitedAlpha#t
 
     invoke-virtual {v3, v4}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -4307,7 +4307,7 @@
     .line 3287
     iget-object v2, p0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
 
-    const v4, 0x10c0003
+    const v4, #android:interpolator@decelerate_cubic#t
 
     invoke-static {v2, v4}, Landroid/view/animation/AnimationUtils;->loadInterpolator(Landroid/content/Context;I)Landroid/view/animation/Interpolator;
 
@@ -4570,7 +4570,7 @@
 
     iget-object v3, v0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
 
-    const v5, 0x10c0001
+    const v5, #android:interpolator@decelerate_quad#t
 
     invoke-static {v3, v5}, Landroid/view/animation/AnimationUtils;->loadInterpolator(Landroid/content/Context;I)Landroid/view/animation/Interpolator;
 
@@ -7462,7 +7462,7 @@
 
     iget-object v2, v0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
 
-    const v8, 0x10a006a
+    const v8, #android:anim@window_move_from_decor#t
 
     invoke-static {v2, v8}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
 
@@ -27350,7 +27350,7 @@
 
     move-result-object v13
 
-    const v15, 0x1110024
+    const v15, #android:bool@config_enableWallpaperService#t
 
     invoke-virtual {v13, v15}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -41862,4 +41862,18 @@
     move-result-object v0
 
     return-object v0
+.end method
+
+.method public reboot(Z)V
+    .locals 2
+    .parameter "confirm"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
+
+    const/4 v1, 0x0
+
+    invoke-static {v0, v1, p1}, Lcom/android/server/pm/ShutdownThread;->reboot(Landroid/content/Context;Ljava/lang/String;Z)V
+
+    return-void
 .end method

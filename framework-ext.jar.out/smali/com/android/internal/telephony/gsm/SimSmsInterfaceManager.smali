@@ -1,5 +1,5 @@
 .class public Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;
-.super Lcom/android/internal/telephony/IccSmsInterfaceManager;
+.super Lcom/android/internal/telephony/IccSmsInterfaceManagerBaidu;
 .source "SimSmsInterfaceManager.java"
 
 
@@ -77,46 +77,38 @@
     .parameter "dispatcher"
 
     .prologue
-    .line 182
-    invoke-direct {p0, p1}, Lcom/android/internal/telephony/IccSmsInterfaceManager;-><init>(Lcom/android/internal/telephony/PhoneBase;)V
+    invoke-direct {p0, p1}, Lcom/android/internal/telephony/IccSmsInterfaceManagerBaidu;-><init>(Lcom/android/internal/telephony/PhoneBase;)V
 
-    .line 53
     new-instance v0, Ljava/lang/Object;
 
     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;->mLock:Ljava/lang/Object;
 
-    .line 56
     new-instance v0, Ljava/util/HashMap;
 
     invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
 
     iput-object v0, p0, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;->mCellBroadcastSubscriptions:Ljava/util/HashMap;
 
-    .line 63
     new-instance v0, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager$CellBroadcastRangeManager;
 
     invoke-direct {v0, p0}, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager$CellBroadcastRangeManager;-><init>(Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;)V
 
     iput-object v0, p0, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;->mCellBroadcastRangeManager:Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager$CellBroadcastRangeManager;
 
-    .line 77
     new-instance v0, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager$1;
 
     invoke-direct {v0, p0}, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager$1;-><init>(Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;)V
 
     iput-object v0, p0, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;->mHandler:Landroid/os/Handler;
 
-    .line 183
     iput-object p2, p0, Lcom/android/internal/telephony/IccSmsInterfaceManager;->mDispatcher:Lcom/android/internal/telephony/SMSDispatcher;
 
-    .line 186
     iget-object v0, p1, Lcom/android/internal/telephony/PhoneBase;->mIccRecords:Lcom/android/internal/telephony/IccRecords;
 
     if-eqz v0, :cond_0
 
-    .line 187
     iget-object v0, p1, Lcom/android/internal/telephony/PhoneBase;->mIccRecords:Lcom/android/internal/telephony/IccRecords;
 
     invoke-virtual {v0}, Lcom/android/internal/telephony/IccRecords;->getSmsCache()Lcom/android/internal/telephony/SmsRecordCache;
@@ -953,13 +945,11 @@
     .locals 3
 
     .prologue
-    .line 198
     :try_start_0
-    invoke-super {p0}, Landroid/os/Binder;->finalize()V
+    invoke-super {p0}, Lcom/android/internal/telephony/IccSmsInterfaceManagerBaidu;->finalize()V
     :try_end_0
     .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 202
     :goto_0
     const-string v1, "GSM"
 
@@ -1516,3 +1506,14 @@
 
     goto :goto_0
 .end method
+
+# Remove the first '#' if you want to enable this method. It might be invoked from codes of BOSP.
+#.method static synthetic access$invoke-buildValidRawData-6824c8(Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;Ljava/util/ArrayList;)Ljava/util/ArrayList;
+#    .locals 1
+#    .parameter "x0"
+#    .parameter "x1"
+#    .prologue
+#    invoke-virtual {p0, p1}, Lcom/android/internal/telephony/gsm/SimSmsInterfaceManager;->buildValidRawData(Ljava/util/ArrayList;)Ljava/util/ArrayList;
+#    move-result-object v0
+#    return-object v0
+#.end method
