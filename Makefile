@@ -174,7 +174,7 @@ RECOVERY_OTA_ASSERT := false
 # Generally, it will reduce the size of system, but it will also cost much more time to build.
 # It can be false, when you use a baidu.zip which is not a full resource package, but has the same resolution with your device.
 #-----------------------------------------------------------------------------
-MINI_SYSTEM := false
+# MINI_SYSTEM := false
 
 ##############################################################################
 # The value decides whether build the system image.

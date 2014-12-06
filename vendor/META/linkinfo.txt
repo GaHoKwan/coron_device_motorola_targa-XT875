@@ -250,7 +250,6 @@ system/fonts/DroidSans-Bold.ttf|system/fonts/Roboto-Bold.ttf
 system/fonts/DroidSans.ttf|system/fonts/Roboto-Regular.ttf
 system/lib/egl/egl.cfg|/sys/egl/egl.cfg
 system/preinstall|/preinstall
-system/vendor/lib/libPVRScopeServices.so|system/vendor/lib/libPVRScopeServices_SGX540_120.so
 system/xbin/acpid|/system/xbin/busybox
 system/xbin/addgroup|/system/xbin/busybox
 system/xbin/adduser|/system/xbin/busybox

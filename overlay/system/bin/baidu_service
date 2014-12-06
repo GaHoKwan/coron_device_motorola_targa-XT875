@@ -5,13 +5,13 @@ function killSystemProc(){
 }
 
 function useBaiduAdbd(){
-	setprop persist.sys.usb.config mass_storage
+	setprop persist.sys.usb.config none
 	rm /sbin/adbd
 	busybox cp -r /system/sbin/adbd /sbin/
 	chmod 0750 /sbin/adbd
 	ls -l /sbin
 	ps | grep adb | busybox awk '{print $2}' | busybox xargs kill -9
-	setprop persist.sys.usb.config mass_storage,adb
+	setprop persist.sys.usb.config adb
 	echo "use baidu's adbd done!"
 }
 
