@@ -797,21 +797,6 @@
 
     .line 210
     .local v9, visFlags:I
-    iget-object v1, p0, Lcom/android/internal/policy/impl/KeyguardViewManager;->mKeyguardView:Lcom/android/internal/policy/impl/KeyguardViewBase;
-
-    invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardViewBase;->isBackEnabledOnTSB()Z
-
-    move-result v1
-
-    if-nez v1, :cond_7
-
-    .line 211
-    const/high16 v1, 0x40
-
-    or-int/2addr v9, v1
-
-    .line 214
-    :cond_7
     sget-object v1, Lcom/android/internal/policy/impl/KeyguardViewManager;->TAG:Ljava/lang/String;
 
     new-instance v2, Ljava/lang/StringBuilder;

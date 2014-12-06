@@ -434,9 +434,6 @@
     goto :goto_0
 .end method
 
-.method public abstract isBackEnabledOnTSB()Z
-.end method
-
 .method public abstract onScreenTurnedOff()V
 .end method
 

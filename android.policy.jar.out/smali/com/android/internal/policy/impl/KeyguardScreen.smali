@@ -10,9 +10,6 @@
 .method public abstract getCreationOrientation()I
 .end method
 
-.method public abstract isBackEnabledOnTSB()Z
-.end method
-
 .method public abstract needsInput()Z
 .end method
 

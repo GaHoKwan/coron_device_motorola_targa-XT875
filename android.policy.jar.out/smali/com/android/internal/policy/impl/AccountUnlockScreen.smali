@@ -766,16 +766,6 @@
     return v0
 .end method
 
-.method public isBackEnabledOnTSB()Z
-    .locals 1
-
-    .prologue
-    .line 385
-    const/4 v0, 0x1
-
-    return v0
-.end method
-
 .method public needsInput()Z
     .locals 1
 

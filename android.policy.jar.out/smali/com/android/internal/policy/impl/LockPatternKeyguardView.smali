@@ -2312,19 +2312,6 @@
 
     invoke-interface {v4, v3}, Lcom/android/internal/policy/impl/KeyguardWindowController;->setNeedsInput(Z)V
 
-    .line 1205
-    iget-object v4, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mWindowController:Lcom/android/internal/policy/impl/KeyguardWindowController;
-
-    move-object v3, v2
-
-    check-cast v3, Lcom/android/internal/policy/impl/KeyguardScreen;
-
-    invoke-interface {v3}, Lcom/android/internal/policy/impl/KeyguardScreen;->isBackEnabledOnTSB()Z
-
-    move-result v3
-
-    invoke-interface {v4, v3}, Lcom/android/internal/policy/impl/KeyguardWindowController;->enableBackOnTSB(Z)V
-
     .line 1213
     iget-boolean v3, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mScreenOn:Z
 
@@ -2953,38 +2940,6 @@
     move-result v2
 
     return v2
-.end method
-
-.method public isBackEnabledOnTSB()Z
-    .locals 3
-
-    .prologue
-    .line 1135
-    iget-object v1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;
-
-    sget-object v2, Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;->LockScreen:Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;
-
-    if-ne v1, v2, :cond_0
-
-    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mLockScreen:Landroid/view/View;
-
-    .line 1136
-    .local v0, visibleScreen:Landroid/view/View;
-    :goto_0
-    check-cast v0, Lcom/android/internal/policy/impl/KeyguardScreen;
-
-    .end local v0           #visibleScreen:Landroid/view/View;
-    invoke-interface {v0}, Lcom/android/internal/policy/impl/KeyguardScreen;->isBackEnabledOnTSB()Z
-
-    move-result v1
-
-    return v1
-
-    .line 1135
-    :cond_0
-    iget-object v0, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUnlockScreen:Landroid/view/View;
-
-    goto :goto_0
 .end method
 
 .method protected onConfigurationChanged(Landroid/content/res/Configuration;)V
