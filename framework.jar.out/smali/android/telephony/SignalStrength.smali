@@ -2084,11 +2084,19 @@
 .end method
 
 .method public getEvdoLevel()I
-    .locals 1
+    .locals 2
 
     .prologue
     .line 898
     iget v0, p0, Landroid/telephony/SignalStrength;->mEvdoLevel:I
+
+    const/4 v1, 0x4
+
+    if-le v0, v1, :cond_baidu_0
+
+    const/4 v0, 0x4
+
+    :cond_baidu_0
 
     return v0
 .end method

@@ -8,7 +8,7 @@ def AddArgsForFormatSystem(info):
 			edify.script[i] = 'delete_recursive("/system");'
 			return
 
-def RemoveDeviceAssert(info):
+def Removeunmount(info):
 	edify = info.script
 	for i in xrange(len(edify.script)):
 		if "unmount" in edify.script[i]:
@@ -17,3 +17,4 @@ def RemoveDeviceAssert(info):
 
 def FullOTA_InstallEnd(info):
 	AddArgsForFormatSystem(info)
+	Removeunmount(info)
