@@ -54,7 +54,7 @@ RESOLUTION := 540x960
 # The default value is Bluetooth.
 # You can configure the apk name in the vendor/system/app or vendor/system/pri-app directory.
 #-----------------------------------------------------------------------------
-vendor_saved_apps := Bluetooth BluetoothMot Stk
+vendor_saved_apps := Bluetooth BluetoothMot Stk MotorolaSettingsProvider
 
 ##############################################################################
 # The value decides which vendor apk you want to modify.
