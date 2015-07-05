@@ -1,6 +1,13 @@
 import common
 import edify_generator
 
+def MountSystem(info):
+	edify = info.script
+	for i in xrange(len(edify.script)):
+		if "unmount" in edify.script[i]:
+			edify.script[i] = 'mount("ext4", "EMMC", "/dev/block/system", "/system");'
+			return
+
 def FormatSystem(info):
 	edify = info.script
 	for i in xrange(len(edify.script)):
@@ -8,13 +15,6 @@ def FormatSystem(info):
 			edify.script[i] = 'delete_recursive("/system");'
 			return
 
-def ShowProgress(info):
-	edify = info.script
-	for i in xrange(len(edify.script)):
-		if "unmount" in edify.script[i]:
-			edify.script[i] = 'show_progress(0.400000, 0);'
-			return
-
 def FullOTA_InstallEnd(info):
-	ShowProgress(info)
 	FormatSystem(info)
+	MountSystem(info)

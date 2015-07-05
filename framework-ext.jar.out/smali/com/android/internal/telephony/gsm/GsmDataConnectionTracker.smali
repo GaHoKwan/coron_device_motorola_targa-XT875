@@ -3454,21 +3454,21 @@
 
     move-result-object v0
 
-    const-string v1, " AND spn LIKE \'"
+#    const-string v1, " AND spn LIKE \'"
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+#    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
+#    move-result-object v0
 
-    invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+#    invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
+#    move-result-object v0
 
-    const-string v1, "\'"
+#    const-string v1, "\'"
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+#    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
+#    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -3817,19 +3817,21 @@
 
     .line 1456
     .local v25, enabled:I
-    const-string v3, "mtusize"
+    #const-string v3, "mtusize"
 
-    move-object/from16 v0, p1
+    #move-object/from16 v0, p1
 
-    invoke-interface {v0, v3}, Landroid/database/Cursor;->getColumnIndexOrThrow(Ljava/lang/String;)I
+    #invoke-interface {v0, v3}, Landroid/database/Cursor;->getColumnIndexOrThrow(Ljava/lang/String;)I
 
-    move-result v3
+    #move-result v3
 
-    move-object/from16 v0, p1
+    #move-object/from16 v0, p1
 
-    invoke-interface {v0, v3}, Landroid/database/Cursor;->getInt(I)I
+    #invoke-interface {v0, v3}, Landroid/database/Cursor;->getInt(I)I
 
-    move-result v22
+    #move-result v22
+
+    const/16 v22, 0x0
 
     .line 1460
     .local v22, mtuSize:I
@@ -4098,41 +4100,45 @@
 
     move-result v19
 
-    const-string v20, "inactivetimer"
+    #const-string v20, "inactivetimer"
 
-    move-object/from16 v0, p1
+    #move-object/from16 v0, p1
 
-    move-object/from16 v1, v20
+    #move-object/from16 v1, v20
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndexOrThrow(Ljava/lang/String;)I
+    #invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndexOrThrow(Ljava/lang/String;)I
 
-    move-result v20
+    #move-result v20
 
-    move-object/from16 v0, p1
+    #move-object/from16 v0, p1
 
-    move/from16 v1, v20
+    #move/from16 v1, v20
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
+    #invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
 
-    move-result v20
+    #move-result v20
 
-    const-string v21, "class"
+    const/16 v20, 0x0
 
-    move-object/from16 v0, p1
+    #const-string v21, "class"
 
-    move-object/from16 v1, v21
+    #move-object/from16 v0, p1
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndexOrThrow(Ljava/lang/String;)I
+    #move-object/from16 v1, v21
 
-    move-result v21
+    #invoke-interface {v0, v1}, Landroid/database/Cursor;->getColumnIndexOrThrow(Ljava/lang/String;)I
 
-    move-object/from16 v0, p1
+    #move-result v21
 
-    move/from16 v1, v21
+    #move-object/from16 v0, p1
 
-    invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
+    #move/from16 v1, v21
 
-    move-result v21
+    #invoke-interface {v0, v1}, Landroid/database/Cursor;->getInt(I)I
+
+    #move-result v21
+
+    const/16 v21, 0x0
 
     move-object/from16 v0, p0
 
